@@ -65,7 +65,7 @@ return {
         -- },
         -- biome = true,
         vtsls = {
-          filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" }
+          filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
         },
 
         tailwindcss = true,
@@ -170,6 +170,7 @@ return {
           vim.keymap.set("n", "gr", builtin.lsp_references, { buffer = 0 })
           vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = 0 })
           vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, { buffer = 0 })
+          vim.keymap.set("n", "gl", vim.diagnostic.open_float, { buffer = 0 })
           vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = 0 })
 
           vim.keymap.set("n", "<space>cr", vim.lsp.buf.rename, { buffer = 0 })
