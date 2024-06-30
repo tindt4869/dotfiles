@@ -21,6 +21,16 @@ set("n", "<CR>", function()
   end
 end, { expr = true })
 
+set("n", "<Esc>", function()
+  ---@diagnostic disable-next-line: undefined-field
+  if vim.v.hlsearch == 1 then
+    vim.cmd.nohl()
+    return ""
+  else
+    return k "<CR>"
+  end
+end, { expr = true })
+
 -- Normally these are not good mappings, but I have left/right on my thumb
 -- cluster, so navigating tabs is quite easy this way.
 set("n", "<left>", "gT")
