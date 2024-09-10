@@ -68,7 +68,7 @@ return {
           filetypes = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
         },
 
-        tailwindcss = true,
+        -- tailwindcss = true,
 
         jsonls = {
           settings = {
