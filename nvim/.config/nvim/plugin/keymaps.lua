@@ -66,3 +66,12 @@ end)
 set("n", "<space>tt", function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = 0 }, { bufnr = 0 })
 end)
+
+-- Toggle comment
+vim.keymap.set("n", "<space>/", ":normal gcc<CR><DOWN>", { desc = "[/] Toggle comment line" })
+-- <Esc> - exists visual mode.
+-- :normal executes keystrokes in normal mode.
+-- gv - restores selection.
+-- gc - toggles comment
+-- <CR> sends the command
+vim.keymap.set("v", "<space>/", "<Esc>:normal gvgc<CR>", { desc = "[/] Toggle comment block" })
