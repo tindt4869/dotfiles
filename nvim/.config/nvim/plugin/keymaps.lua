@@ -2,8 +2,6 @@ local set = vim.keymap.set
 local k = vim.keycode
 local opts = { noremap = true, silent = true }
 
-vim.g.mapleader = " "
-
 -- Basic movement keybinds, these make navigating splits easy for me
 set("n", "<c-j>", "<c-w><c-j>")
 set("n", "<c-k>", "<c-w><c-k>")
@@ -88,3 +86,5 @@ vim.keymap.set("v", "<space>/", "<Esc>:normal gvgc<CR>", { desc = "[/] Toggle co
 -- Buffers
 vim.keymap.set("n", "<Tab>", ":bnext<CR>", opts)
 vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", opts)
+vim.keymap.set("n", "<leader>c", ":bdelete<CR>", opts) -- close buffer
+vim.keymap.set("n", "<leader>b", "<cmd> enew <CR>", opts) -- new buffer
