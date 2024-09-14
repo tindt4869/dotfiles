@@ -1,5 +1,8 @@
 local set = vim.keymap.set
 local k = vim.keycode
+local opts = { noremap = true, silent = true }
+
+vim.g.mapleader = " "
 
 -- Basic movement keybinds, these make navigating splits easy for me
 set("n", "<c-j>", "<c-w><c-j>")
@@ -9,6 +12,9 @@ set("n", "<c-h>", "<c-w><c-h>")
 
 set("n", "<leader>x", "<cmd>.lua<CR>", { desc = "Execute the current line" })
 set("n", "<leader><leader>x", "<cmd>source %<CR>", { desc = "Execute the current file" })
+
+-- delete single character without copying into register
+vim.keymap.set("n", "x", '"_x', opts)
 
 -- Toggle hlsearch if it's on, otherwise just do "enter"
 set("n", "<CR>", function()
