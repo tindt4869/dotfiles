@@ -84,3 +84,7 @@ vim.keymap.set("n", "<space>/", ":normal gcc<CR><DOWN>", { desc = "[/] Toggle co
 -- gc - toggles comment
 -- <CR> sends the command
 vim.keymap.set("v", "<space>/", "<Esc>:normal gvgc<CR>", { desc = "[/] Toggle comment block" })
+
+-- Buffers
+vim.keymap.set("n", "<Tab>", ":bnext<CR>", opts)
+vim.keymap.set("n", "<S-Tab>", ":bprevious<CR>", opts)
