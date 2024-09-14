@@ -16,6 +16,9 @@ set("n", "<leader><leader>x", "<cmd>source %<CR>", { desc = "Execute the current
 -- delete single character without copying into register
 vim.keymap.set("n", "x", '"_x', opts)
 
+-- keep last yanked when pasting
+vim.keymap.set("v", "p", '"_dP', opts)
+
 -- Toggle hlsearch if it's on, otherwise just do "enter"
 set("n", "<CR>", function()
   ---@diagnostic disable-next-line: undefined-field
