@@ -34,10 +34,10 @@ vim.keymap.set("n", "<space>fa", function()
   builtin.find_files { cwd = vim.fs.joinpath(vim.fn.stdpath "data", "lazy") }
 end)
 
-vim.keymap.set("n", "<space>en", function()
+vim.keymap.set("n", "<space>fn", function()
   builtin.find_files { cwd = vim.fn.stdpath "config" }
 end)
 
-vim.keymap.set("n", "<space>eo", function()
+vim.keymap.set("n", "<space>fo", function()
   builtin.find_files { cwd = "~/.config/nvim-backup/" }
 end)
