@@ -78,6 +78,10 @@ set("n", "<space>tt", function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = 0 }, { bufnr = 0 })
 end, { desc = "Toggle inline hint" })
 
+-- Toggle diagnostics
+set("n", "<leader>tdv", "<cmd>DiagnosticsToggleVirtualText<CR>", { desc = "Toggle diagnostics virtual text" })
+set("n", "<leader>td", "<cmd>DiagnosticsToggle<CR>", { desc = "Toggle diagnostics" })
+
 -- Toggle comment
 set("n", "<space>/", ":normal gcc<CR><DOWN>", { desc = "Toggle comment line" })
 -- <Esc> - exists visual mode.

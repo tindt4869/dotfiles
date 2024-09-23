@@ -42,3 +42,6 @@ end)
 
 -- Don't have `o` add a comment
 opt.formatoptions:remove "o"
+
+-- Don't automatically wrap on load
+opt.wrap = false

@@ -9,11 +9,4 @@ return {
     end,
   },
   { "rose-pine/neovim", name = "rose-pine" },
-  {
-    "maxmx03/fluoromachine.nvim",
-    -- config = function()
-    --   local fm = require "fluoromachine"
-    --   fm.setup { glow = true, theme = "fluoromachine" }
-    -- end,
-  },
 }

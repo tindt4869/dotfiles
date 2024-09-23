@@ -27,7 +27,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Set up lazy, and load my `lua/custom/plugins/` folder
-require("lazy").setup({ import = "custom/plugins" }, {
+require("lazy").setup({ import = "plugins" }, {
   change_detection = {
     notify = false,
   },
