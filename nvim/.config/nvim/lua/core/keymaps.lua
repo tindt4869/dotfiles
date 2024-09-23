@@ -2,9 +2,6 @@ local set = vim.keymap.set
 local k = vim.keycode
 local opts = { noremap = true, silent = true }
 
--- Disable the spacebar key's default behavior in Normal and Visual modes
-set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
-
 -- Basic movement keybinds, these make navigating splits easy for me
 set("n", "<c-j>", "<c-w><c-j>")
 set("n", "<c-k>", "<c-w><c-k>")

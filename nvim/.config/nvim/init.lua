@@ -10,6 +10,11 @@ require "core.keymaps"
 require "core.autocommands"
 require "core.terminal"
 
+-- Set <space> as the leader key
+-- NOTE: must happen before plugins are loaded (otherwise wrong leader will be used)
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
   vim.fn.system {
