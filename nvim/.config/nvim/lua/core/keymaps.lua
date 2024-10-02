@@ -70,6 +70,9 @@ set("n", "<M-k>", function()
   end
 end)
 
+-- Toggle format on save
+set("n", "<space>tf", "<cmd>FormatToggle<CR>", { desc = "Toggle format on save" })
+
 -- Toggle inline hint
 set("n", "<space>tt", function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = 0 }, { bufnr = 0 })
