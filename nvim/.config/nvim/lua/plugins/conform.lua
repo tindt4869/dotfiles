@@ -1,9 +1,27 @@
 return {
-  "stevearc/conform.nvim",
-  event = { "BufWritePre" },
-  config = function()
-    local conform = require "conform"
-    conform.setup {
+  {
+    "stevearc/conform.nvim",
+    event = { "BufWritePre" },
+    cmd = { "ConformInfo" },
+    keys = {
+      {
+        "<leader>f",
+        function()
+          require("conform").format { async = true, lsp_format = "fallback" }
+        end,
+        mode = "",
+        desc = "[F]ormat buffer",
+      },
+      {
+        "<leader>l",
+        function()
+          require("conform").format { async = true, lsp_format = "fallback" }
+        end,
+        mode = { "n", "v" },
+        desc = "Format file or range (in visual mode)",
+      },
+    },
+    opts = {
       formatters_by_ft = {
         lua = { "stylua" },
         svelte = { { "prettierd", "prettier", stop_after_first = true } },
@@ -34,14 +52,6 @@ return {
         end
         return { timeout_ms = 500, lsp_format = "fallback" }
       end,
-    }
-
-    vim.keymap.set({ "n", "v" }, "<leader>l", function()
-      conform.format {
-        lsp_callback = true,
-        async = true,
-        timeout_ms = 1000,
-      }
-    end, { desc = "Format file or range (in visual mode)" })
-  end,
+    },
+  },
 }
