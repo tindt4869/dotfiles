@@ -44,6 +44,8 @@ return {
         scss = { { "prettierd", "prettier", stop_after_first = true } },
         sh = { "shellcheck" },
         go = { "gofmt" },
+        c = { "clang_format" },
+        cpp = { "clang_format" },
       },
       format_on_save = function(bufnr)
         -- Disable with a global or buffer-local variable
