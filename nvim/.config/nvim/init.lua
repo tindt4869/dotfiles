@@ -9,6 +9,7 @@ require "core.options"
 require "core.keymaps"
 require "core.autocommands"
 require "core.terminal"
+require "core.filetype"
 
 -- Set <space> as the leader key
 -- NOTE: must happen before plugins are loaded (otherwise wrong leader will be used)
