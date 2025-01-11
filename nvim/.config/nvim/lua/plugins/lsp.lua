@@ -14,6 +14,13 @@ return {
   { "Bilal2453/luvit-meta", lazy = true },
   {
     "neovim/nvim-lspconfig",
+    opts = {
+      setup = {
+        rust_analyzer = function()
+          return true
+        end,
+      },
+    },
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
       { "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
@@ -146,7 +153,9 @@ return {
 
       local servers = {
         bashls = true,
-        rust_analyzer = true,
+        -- rust_analyzer = function()
+        --   return true
+        -- end,
         cssls = true,
         -- tailwindcss = true,
         vtsls = {
@@ -267,6 +276,10 @@ return {
             require("lspconfig")[server_name].setup(server)
           end,
         },
+      }
+
+      require("mason-lspconfig").setup_handlers {
+        ["rust_analyzer"] = function() end,
       }
 
       -- Disable diagnostic virtual text from the lsp
