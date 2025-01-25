@@ -539,3 +539,63 @@ snippet main
 
 snippet beginend
 	$1.begin(), $1.end()
+
+snippet sieveOfEratosthenes
+  int N = 1e6;
+  int F[1000005];
+
+  void sieveOfEratosthenes() {
+    for (int i = 0; i <= N; i++) {
+      F[i] = 1;
+    }
+
+    F[0] = F[1] = 0;
+
+    for (int i = 2; i < sqrt(N); i++) {
+      if (F[i] == 1) {
+        for (int j = i * i; j <= N; j += i) {
+          F[j] = 0;
+        }
+      }
+    }
+  } 
+
+
+
+snippet isPrime
+  bool isPrime(int n) {
+    if (n <= 1)
+      return false;
+    if (n == 2)
+      return true;
+    if (n % 2 == 0)
+      return false;
+
+    for (int i = 3; i <= sqrt(n); i += 2) {
+      if (n % i == 0)
+        return false;
+    }
+
+    return true;
+  }
+
+snippet segmentedSieve
+  void segmentedSieve(ll L, ll R) {
+    int F[R - L + 1];
+    for (ll i = L; i <= R; i++) {
+      F[i - L] = 1;
+    }
+  
+    for (ll i = 2; i <= sqrt(R); i++) {
+      for (ll j = max(i * i, (L + i - 1) / i * i); j <= R; j += i) {
+        F[j - L] = 0;
+      }
+    }
+  
+    for (ll i = max(2ll, L); i <= R; i++) {
+      if (F[i - L])
+        cout << i << " ";
+    }
+  
+    cout << "\n";
+  }
