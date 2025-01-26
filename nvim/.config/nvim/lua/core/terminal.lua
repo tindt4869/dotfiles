@@ -9,6 +9,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
     set.scrolloff = 0
 
     vim.bo.filetype = "terminal"
+    vim.cmd ":startinsert"
   end,
 })
 
