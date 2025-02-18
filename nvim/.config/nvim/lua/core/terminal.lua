@@ -36,16 +36,18 @@ vim.keymap.set("n", ",st", function()
 end)
 
 vim.keymap.set("n", ",sa", function()
+  local filedir = vim.fn.expand "%:p:h"
   local filename = vim.fn.expand "%:t:r"
   vim.cmd.new()
   vim.cmd.wincmd "J"
   vim.api.nvim_win_set_height(0, 12)
-  local cmd = "g++ " .. filename .. ".cpp -o " .. filename .. " && ./" .. filename
+  local cmd = "cd " .. filedir .. " && g++ " .. filename .. ".cpp -o " .. filename .. " && ./" .. filename
   vim.cmd("term " .. cmd)
   -- vim.api.nvim_feedkeys("i", "n", false)
 end)
 
 vim.keymap.set("n", ",ss", function()
+  local filedir = vim.fn.expand "%:p:h"
   local filename = vim.fn.expand "%:t:r"
 
   vim.cmd.new()
@@ -63,7 +65,7 @@ vim.keymap.set("n", ",ss", function()
 
   vim.api.nvim_win_set_buf(win, buf)
 
-  local cmd = "g++ " .. filename .. ".cpp -o " .. filename .. " && ./" .. filename
+  local cmd = "cd " .. filedir .. " && g++ " .. filename .. ".cpp -o " .. filename .. " && ./" .. filename
   -- local cmd = "g++ ./main.cpp -o main && ./main"
 
   -- Send the command to the terminal
