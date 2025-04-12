@@ -38,7 +38,7 @@ return {
           gitsigns.reset_hunk { vim.fn.line ".", vim.fn.line "v" }
         end)
         map("n", "<leader>hS", gitsigns.stage_buffer)
-        map("n", "<leader>hu", gitsigns.undo_stage_hunk)
+        map("n", "<leader>hu", gitsigns.stage_hunk)
         map("n", "<leader>hR", gitsigns.reset_buffer)
         map("n", "<leader>hp", gitsigns.preview_hunk)
         map("n", "<leader>hb", function()
@@ -49,14 +49,13 @@ return {
         map("n", "<leader>hD", function()
           gitsigns.diffthis "~"
         end)
-        map("n", "<leader>td", gitsigns.toggle_deleted)
 
         -- Text object
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
 
         -- Toggles
-        map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle git show [b]lame line' })
-        map('n', '<leader>tD', gitsigns.toggle_deleted, { desc = '[T]oggle git show [D]eleted' })
+        map("n", "<leader>tb", gitsigns.toggle_current_line_blame, { desc = "[T]oggle git show [b]lame line" })
+        map("n", "<leader>tD", gitsigns.preview_hunk_inline, { desc = "[T]oggle git show [D]eleted" })
       end,
     }
   end,
