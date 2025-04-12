@@ -2,6 +2,7 @@ return {
   "saghen/blink.cmp",
   -- optional: provides snippets for the snippet source
   dependencies = {
+    "folke/lazydev.nvim",
     {
       "L3MON4D3/LuaSnip",
       verson = "v2.*",
@@ -63,6 +64,9 @@ return {
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
       default = { "lsp", "path", "snippets", "buffer" },
+      providers = {
+        lazydev = { module = "lazydev.integrations.blink", score_offset = 100 },
+      },
     },
 
     completion = {
