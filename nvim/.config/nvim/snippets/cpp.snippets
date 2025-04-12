@@ -535,7 +535,30 @@ snippet main
     return 0;
   }
 
+snippet main-simple
+  #include <ios>
+  #include <iostream>
+  using namespace std;
 
+  int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    $1
+
+    return 0;
+  }
+
+snippet fastio
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+
+snippet loop
+  for (int i = 0; i < n; i++) {
+    $1;
+  }
 
 snippet beginend
 	$1.begin(), $1.end()
@@ -599,3 +622,51 @@ snippet segmentedSieve
   
     cout << "\n";
   }
+
+snippet dfs
+  void dfs(int u) {
+    visited[u] = 1;
+    for (int v : adj[u]) {
+      if (!visited[v])
+        dfs(v);
+    }
+  }
+
+snippet bfs
+  void bfs(int u) {
+    queue<int> q;
+    q.push(u);
+    visited[u] = 1;
+    while (!q.empty()) {
+      int v = q.front();
+      q.pop();
+      for (int x : adj[v]) {
+        if (!visited[x]) {
+          q.push(x);
+          visited[x] = 1;
+      }
+    }
+  }
+
+snippet inputgraph
+  void inputGraph() {
+    cin >> n >> m;
+    for (int i = 1; i <= m; i++) {
+      int x, y;
+      cin >> x >> y;
+      adj[x].push_back(y);
+      adj[y].push_back(x);
+    }
+  }
+
+snippet knight
+  int dx[8] = {-2, -2, -1, -1, +1, +1, +2, +2};
+  int dy[8] = {-1, +1, -2, +2, -2, +2, -1, +1};
+
+snippet move4
+  int dx[4] = {-1, 0, 0, 1};
+  int dy[4] = {0, -1, 1, 0};
+
+snippet move8
+  int dx[8] = {-1, -1, -1, 0, 0, 1, 1, 1};
+  int dy[8] = {0, -1, 1, -1, 1, 0, -1, 1};
