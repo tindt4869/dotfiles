@@ -65,7 +65,18 @@ vim.keymap.set("n", ",ss", function()
 
   vim.api.nvim_win_set_buf(win, buf)
 
-  local cmd = "cd " .. filedir .. " && g++ " .. filename .. ".cpp -o " .. filename .. " && ./" .. filename
+  local temp_exec = "/dev/shm/" .. filename
+
+  local cmd = "cd "
+    .. filedir
+    .. " && g++ "
+    .. filename
+    .. ".cpp -o "
+    .. temp_exec
+    .. " && "
+    .. temp_exec
+    .. " && rm -f "
+    .. temp_exec
   -- local cmd = "g++ ./main.cpp -o main && ./main"
 
   -- Send the command to the terminal
