@@ -1,7 +1,7 @@
 return {
   {
     "folke/tokyonight.nvim",
-    lazy = false,
+    lazy = true,
     priority = 1000,
     opts = {},
   },
@@ -50,12 +50,34 @@ return {
     priority = 1000,
     config = function()
       require("cyberdream").setup {
-        variant = "auto",
         transparent = true,
-        saturation = 0.8,
         italic_comments = true,
+        hide_fillchars = false,
+        borderless_telescope = false,
+        terminal_colors = true,
+        theme = {
+          variant = "auto",
+        },
+        extensions = {
+          telescope = true,
+          mini = true,
+        },
       }
+
       vim.cmd.colorscheme "cyberdream"
     end,
+  },
+  {
+    "mawkler/modicator.nvim",
+    dependencies = "scottmckendry/cyberdream.nvim",
+    init = function()
+      -- These are required for Modicator to work
+      vim.o.cursorline = false
+      vim.o.number = true
+      vim.o.termguicolors = true
+    end,
+    opts = {
+      show_warning = true,
+    },
   },
 }
