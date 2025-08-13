@@ -292,9 +292,7 @@ return {
         },
       }
 
-      require("mason-lspconfig").setup_handlers {
-        ["rust_analyzer"] = function() end,
-      }
+      vim.lsp.config("rust_analyzer", {})
 
       -- Disable diagnostic virtual text from the lsp
       vim.diagnostic.config {
