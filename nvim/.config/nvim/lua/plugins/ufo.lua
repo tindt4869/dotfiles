@@ -27,7 +27,7 @@ return {
     config = function()
       vim.o.foldmethod = "expr"
       vim.o.foldexpr = "v:lua.require'ufo'.foldexpr()"
-      -- vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+      vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
       local handler = function(virtText, lnum, endLnum, width, truncate)
         local newVirtText = {}
@@ -60,7 +60,7 @@ return {
       require("ufo").setup {
         fold_virt_text_handler = handler,
         provider_selector = function()
-          return { "lsp", "treesitter" }
+          return { "lsp" }
         end,
       }
     end,
