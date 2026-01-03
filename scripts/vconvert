@@ -1,57 +1,90 @@
 #!/bin/bash
 
-# Kiểm tra đủ tham số đầu vào
+# 1. Kiểm tra tham số đầu vào
 if [ $# -lt 2 ]; then
-    echo "Cách dùng:"
-    echo "  vconvert -c input.ts   # (Copy) Nhanh nhất, không nén"
-    echo "  vconvert -g input.ts   # (GPU)  Tốc độ cao, file vừa"
-    echo "  vconvert -s input.ts   # (Size) File nhỏ nhất, dùng CPU"
+    echo "Cách dùng: vconvert [MODE] [INPUT]"
+    echo "  -c : Copy (Giữ nguyên chất lượng, cực nhanh)"
+    echo "  -g : GPU AMD (Dùng phần cứng Vega 7 - Nhanh & Đẹp)"
+    echo "  -s : CPU x265 (Nén sâu nhất, tốn tài nguyên CPU)"
     exit 1
 fi
 
-MODE=$1
-INPUT=$2
-FILENAME=$(basename -- "$INPUT")
-FILENAME_NO_EXT="${FILENAME%.*}"
-OUTPUT="${FILENAME_NO_EXT}.mp4"
+MODE="$1"
+INPUT="$2"
 
-# Kiểm tra file input có tồn tại không
+# 2. Kiểm tra file input có tồn tại không
 if [ ! -f "$INPUT" ]; then
     echo "Lỗi: File '$INPUT' không tồn tại!"
     exit 1
 fi
 
-# Chống ghi đè nếu trùng tên
+# 3. Trích xuất tên file và tạo tên file đầu ra
+FILENAME=$(basename -- "$INPUT")
+FILENAME_NO_EXT="${FILENAME%.*}"
+OUTPUT="${FILENAME_NO_EXT}.mp4"
+
+# 4. Chống ghi đè (Nếu trùng thì thêm timestamp)
 if [ -e "$OUTPUT" ]; then
-    OUTPUT="${FILENAME_NO_EXT}_conv_$(date +%M%S).mp4"
+    OUTPUT="${FILENAME_NO_EXT}_$(date +%H%M%S).mp4"
 fi
 
-case $MODE in
+# 5. Xử lý logic theo từng chế độ
+case "$MODE" in
     -c)
-        echo "--- Chế độ: COPY (Siêu nhanh) ---"
-        ffmpeg -i "$INPUT" -c copy "$OUTPUT"
+        echo "--- Đang thực hiện: COPY ---"
+        ffmpeg_params=(
+            -i "$INPUT"
+            -c copy
+            "$OUTPUT"
+        )
         ;;
+        
     -g)
-        echo "--- Chế độ: GPU (AMD VAAPI) ---"
-        ffmpeg -vaapi_device /dev/dri/renderD128 -i "$INPUT" \
-            -vf 'format=nv12,hwupload,scale_vaapi=w=1280:h=720' \
-            -c:v hevc_vaapi -rc_mode VBR -b:v 500k -maxrate 4M -quality 1 \
-            -c:a aac -b:a 128k "$OUTPUT"
+        echo "--- Đang thực hiện: GPU AMD (CQP Mode) ---"
+        ffmpeg_params=(
+            -vaapi_device /dev/dri/renderD128
+            -i "$INPUT"
+            -vf "format=nv12,hwupload"
+            -c:v hevc_vaapi
+            -rc_mode CQP
+            -qp 25
+            -c:a aac
+            -b:a 128k
+            "$OUTPUT"
+        )
         ;;
+        
     -s)
-        echo "--- Chế độ: SIZE (CPU x265 - Cực nhẹ) ---"
-        # Dùng preset faster để cân bằng thời gian và dung lượng
-        ffmpeg -i "$INPUT" -c:v libx265 -crf 28 -preset faster \
-            -c:a aac -b:a 128k "$OUTPUT"
+        echo "--- Đang thực hiện: CPU x265 (Slow) ---"
+        ffmpeg_params=(
+            -i "$INPUT"
+            -c:v libx265
+            -crf 24
+            -preset slow
+            -c:a aac
+            -b:a 128k
+            "$OUTPUT"
+        )
         ;;
+        
     *)
-        echo "Lỗi: Tham số không hợp lệ ($MODE). Dùng -c, -g hoặc -s."
+        echo "Lỗi: Chế độ '$MODE' không hợp lệ. Hãy dùng -c, -g, hoặc -s."
         exit 1
         ;;
 esac
 
+# 6. Thực thi lệnh FFmpeg với mảng đã chuẩn bị
+ffmpeg "${ffmpeg_params[@]}"
+
+# 7. Kiểm tra kết quả
 if [ $? -eq 0 ]; then
-    echo "--- Xong! File: $OUTPUT ---"
+    echo "------------------------------------------"
+    echo "THÀNH CÔNG! File đầu ra: $OUTPUT"
+    echo "------------------------------------------"
 else
-    echo "--- Lỗi trong quá trình xử lý ---"
+    echo "------------------------------------------"
+    echo "LỖI: Quá trình xử lý thất bại."
+    # Xóa file lỗi nếu có để tránh rác ổ cứng
+    [ -f "$OUTPUT" ] && rm "$OUTPUT"
+    echo "------------------------------------------"
 fi

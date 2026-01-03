@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# Kiểm tra tham số chế độ
+if [ -z "$1" ]; then
+    echo "Cách dùng: vconvert_all <chế độ>"
+    echo "  vconvert_all -c   # Chạy Copy cho tất cả file"
+    echo "  vconvert_all -g   # Chạy GPU cho tất cả file"
+    echo "  vconvert_all -s   # Chạy CPU (Size) cho tất cả file"
+    exit 1
+fi
+
+MODE=$1
+
+# Tạo thư mục đầu ra để tránh lộn xộn
+OUTPUT_DIR="converted_files"
+mkdir -p "$OUTPUT_DIR"
+
+# Danh sách các đuôi file video muốn quét (có thể thêm tùy ý)
+EXTENSIONS=("ts" "mp4" "mkv" "avi" "mov")
+
+echo "--- BẮT ĐẦU QUY TRÌNH XỬ LÝ HÀNG LOẠT ---"
+echo "Chế độ chọn: $MODE"
+echo "Lưu tại: ./$OUTPUT_DIR/"
+
+count=0
+
+# Vòng lặp quét file
+for ext in "${EXTENSIONS[@]}"; do
+    # Dùng case-insensitive để nhận cả .TS và .ts
+    shopt -s nocaseglob
+    for file in *."$ext"; do
+        # Kiểm tra nếu không có file nào khớp thì bỏ qua
+        [ -e "$file" ] || continue
+        
+        echo "--------------------------------------"
+        echo "Đang xử lý ($((++count))): $file"
+        
+        # Gọi lại script vconvert.sh mà bạn đã tạo trước đó
+        # Chúng ta xuất file vào thư mục riêng để không bị trùng lặp
+        vconvert "$MODE" "$file"
+        
+        # Di chuyển file vừa xong vào thư mục output
+        # Tìm file .mp4 vừa được tạo ra dựa trên tên gốc
+        FILENAME_NO_EXT="${file%.*}"
+        # Tìm file có tên bắt đầu bằng FILENAME_NO_EXT và đuôi .mp4
+        mv "${FILENAME_NO_EXT}"*.mp4 "$OUTPUT_DIR/" 2>/dev/null
+    done
+    shopt -u nocaseglob
+done
+
+echo "--------------------------------------"
+echo "XONG! Đã xử lý tổng cộng $count file."
