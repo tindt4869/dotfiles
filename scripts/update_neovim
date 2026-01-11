@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Stop script on any error
+set -e
+
+echo "Downloading latest Neovim..."
+curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.tar.gz
+
+echo "Cleaning up old installation..."
+sudo rm -rf /opt/nvim-linux-x86_64
+
+echo "Extracting to /opt..."
+sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
+
+echo "Creating symbolic link..."
+sudo ln -sf /opt/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
+
+echo "Cleaning up tarball..."
+rm nvim-linux-x86_64.tar.gz
+
+echo "Installation complete! Try running 'nvim --version'"
