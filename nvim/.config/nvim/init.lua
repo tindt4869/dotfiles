@@ -10,27 +10,28 @@ vim.o.pumborder = "rounded"
 vim.o.lazyredraw = true
 vim.o.cursorline = false
 
-require("core.theme")
-require("core.autocommands")
-require("core.usercommands")
-require("core.keymaps")
-require("core.magic")
+require "core.theme"
+require "core.autocommands"
+require "core.usercommands"
+require "core.keymaps"
+require "core.magic"
 
-require("plugins.lsp")
-require("plugins.fzf-lua")
-require("plugins.conform")
-require("plugins.treesitter")
-require("plugins.mini")
-require("plugins.cmp")
-require("plugins.oil")
-require("plugins.trouble")
-require("plugins.gitsigns")
-require("plugins.toggleterm")
+require "plugins.lsp"
+require "plugins.fzf-lua"
+require "plugins.conform"
+require "plugins.treesitter"
+require "plugins.mini"
+require "plugins.cmp"
+require "plugins.oil"
+require "plugins.trouble"
+require "plugins.gitsigns"
+require "plugins.toggleterm"
 -- require("plugins.better-quickfix")
-require("plugins.bento")
-require("plugins.ufo")
-require("utils.packageutils")
-vim.pack.add({
-	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
-})
-require("render-markdown").setup({})
+require "plugins.bento"
+require "plugins.ufo"
+require "plugins.auto-session"
+require "utils.packageutils"
+vim.pack.add {
+    { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
+}
+require("render-markdown").setup {}

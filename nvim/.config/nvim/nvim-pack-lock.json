@@ -8,6 +8,10 @@
       "rev": "f35b7747d4d536fba96aa098a4144e5c85252828",
       "src": "https://github.com/b0o/SchemaStore.nvim"
     },
+    "auto-session": {
+      "rev": "292492ab7af4bd8b9e37e28508bc8ce995722fd5",
+      "src": "https://github.com/rmagatti/auto-session"
+    },
     "bento.nvim": {
       "rev": "d5a2edea7ea2a5353778d0996a881be699eb4402",
       "src": "https://github.com/serhez/bento.nvim"
