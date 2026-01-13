@@ -1,59 +1,36 @@
--- Set <space> as the leader key
--- NOTE: must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
 
-vim.g.have_nerd_font = true
+vim.o.number = true
+vim.o.relativenumber = true
+vim.o.wrap = false
+vim.o.tabstop = 4
+vim.o.signcolumn = "yes"
+vim.o.winborder = "rounded"
+vim.o.pumborder = "rounded"
+vim.o.lazyredraw = true
+vim.o.cursorline = false
 
-require "core.options"
-require "core.keymaps"
-require "core.autocommands"
-require "core.terminal"
-require "core.filetype"
+require("core.theme")
+require("core.autocommands")
+require("core.usercommands")
+require("core.keymaps")
+require("core.magic")
 
--- Set <space> as the leader key
--- NOTE: must happen before plugins are loaded (otherwise wrong leader will be used)
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
-local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
-if not vim.uv.fs_stat(lazypath) then
-  vim.fn.system {
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",
-    lazypath,
-  }
-end
-
--- Add lazy to the `runtimepath`, this allows us to `require` it.
----@diagnostic disable-next-line: undefined-field
-vim.opt.rtp:prepend(lazypath)
-
--- Set up lazy, and load my `lua/custom/plugins/` folder
-require("lazy").setup({ import = "plugins" }, {
-  change_detection = {
-    notify = false,
-  },
-  ui = {
-    -- If you are using a Nerd Font: set icons to an empty table which will use the
-    -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
-    icons = vim.g.have_nerd_font and {} or {
-      cmd = "⌘",
-      config = "🛠",
-      event = "📅",
-      ft = "📂",
-      init = "⚙",
-      keys = "🗝",
-      plugin = "🔌",
-      runtime = "💻",
-      require = "🌙",
-      source = "📄",
-      start = "🚀",
-      task = "📌",
-      lazy = "💤 ",
-    },
-  },
+require("plugins.lsp")
+require("plugins.fzf-lua")
+require("plugins.conform")
+require("plugins.treesitter")
+require("plugins.mini")
+require("plugins.cmp")
+require("plugins.oil")
+require("plugins.trouble")
+require("plugins.gitsigns")
+require("plugins.toggleterm")
+-- require("plugins.better-quickfix")
+require("plugins.bento")
+require("plugins.ufo")
+require("utils.packageutils")
+vim.pack.add({
+	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
 })
+require("render-markdown").setup({})

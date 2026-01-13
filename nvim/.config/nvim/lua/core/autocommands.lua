@@ -1,59 +1,30 @@
--- Highlight when copying text
-vim.api.nvim_create_autocmd("TextYankPost", {
-  desc = "Highlight when yanking (copying) text",
-  group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		if not client then
+			return
+		end
+
+		-- if client:supports_method('textDocument/completion') then
+		-- 	vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+		-- end
+		if client:supports_method("textDocument/formatting") then
+			-- Format current buffer on save
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				buffer = args.buf,
+				callback = function()
+					require("conform").format({ bufnr = args.buf, id = client.id })
+				end,
+			})
+		end
+
+		local opts = { buffer = args.buf }
+		-- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+		-- vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+		-- vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+	end,
 })
 
--- Toggle inline diagnostics
-vim.api.nvim_create_user_command("DiagnosticsToggleVirtualText", function()
-  local current_value = vim.diagnostic.config().virtual_text
-  if current_value then
-    vim.diagnostic.config { virtual_text = false }
-  else
-    vim.diagnostic.config { virtual_text = true }
-  end
-end, {})
-
--- Toggle diagnostics
-vim.api.nvim_create_user_command("DiagnosticsToggle", function()
-  local current_value = vim.diagnostic.is_enabled()
-  if current_value then
-    vim.diagnostic.enable(false)
-  else
-    vim.diagnostic.enable(true)
-  end
-end, {})
-
-vim.api.nvim_create_user_command("FormatDisable", function(args)
-  if args.bang then
-    -- FormatDisable! will disable formatting just for this buffer
-    vim.b.disable_autoformat = true
-  else
-    vim.g.disable_autoformat = true
-  end
-end, {
-  desc = "Disable autoformat-on-save",
-  bang = true,
-})
-vim.api.nvim_create_user_command("FormatEnable", function()
-  vim.b.disable_autoformat = false
-  vim.g.disable_autoformat = false
-end, {
-  desc = "Re-enable autoformat-on-save",
-})
-
--- Toggle auto format on save
-vim.api.nvim_create_user_command("FormatToggle", function(args)
-  local is_global = not args.bang
-  if is_global then
-    vim.g.disable_autoformat = not vim.g.disable_autoformat
-  else
-    vim.b.disable_autoformat = not vim.b.disable_autoformat
-  end
-end, {
-  desc = "Toggle autoformat-on-save",
-  bang = true,
-})
+vim.cmd("set completeopt+=noselect")
