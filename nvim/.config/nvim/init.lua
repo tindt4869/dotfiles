@@ -9,6 +9,7 @@ vim.o.winborder = "rounded"
 vim.o.pumborder = "rounded"
 vim.o.lazyredraw = true
 vim.o.cursorline = false
+vim.o.timeoutlen = 300
 
 require "core.theme"
 require "core.autocommands"
@@ -30,6 +31,7 @@ require "plugins.toggleterm"
 require "plugins.bento"
 require "plugins.ufo"
 require "plugins.auto-session"
+require "plugins.indent"
 require "utils.packageutils"
 vim.pack.add {
     { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
