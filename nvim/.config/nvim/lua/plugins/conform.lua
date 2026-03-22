@@ -21,7 +21,7 @@ require("conform").setup {
         typescriptreact = js_formatter,
         css = js_formatter,
         scss = js_formatter,
-        json = { "prettierd", "prettier", stop_after_first = true },
+        json = {},
         graphql = { "prettierd", "prettier", stop_after_first = true },
         markdown = { "prettierd", "prettier", stop_after_first = true },
         erb = { "htmlbeautifier" },
@@ -35,6 +35,7 @@ require("conform").setup {
         go = { "gofmt" },
         c = { "clang_format" },
         cpp = { "clang_format" },
+        python = { "black" },
     },
     format_on_save = function(bufnr)
         -- Disable with a global or buffer-local variable
