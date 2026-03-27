@@ -9,7 +9,7 @@ vim.o.winborder = "rounded"
 vim.o.pumborder = "rounded"
 vim.o.lazyredraw = true
 vim.o.cursorline = false
-vim.o.timeoutlen = 300
+vim.o.timeoutlen = 1000
 
 require "core.theme"
 require "core.autocommands"
@@ -37,3 +37,5 @@ vim.pack.add {
     { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
 }
 require("render-markdown").setup {}
+
+require "plugins.competi-test"

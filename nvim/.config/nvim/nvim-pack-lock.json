@@ -8,6 +8,10 @@
       "rev": "f35b7747d4d536fba96aa098a4144e5c85252828",
       "src": "https://github.com/b0o/SchemaStore.nvim"
     },
+    "assistant.nvim": {
+      "rev": "d34d2cf8ebd551b26193e70354d87571c980ca61",
+      "src": "https://github.com/A7lavinraj/assistant.nvim"
+    },
     "auto-session": {
       "rev": "292492ab7af4bd8b9e37e28508bc8ce995722fd5",
       "src": "https://github.com/rmagatti/auto-session"
@@ -19,6 +23,10 @@
     "blink.cmp": {
       "rev": "6a4914ca987453464a7dfc7fc237a992adb567d0",
       "src": "https://github.com/saghen/blink.cmp"
+    },
+    "competitest.nvim": {
+      "rev": "b42c06ca308906f07912ba9aff015ac2c0831f85",
+      "src": "https://github.com/xeluxee/competitest.nvim"
     },
     "conform.nvim": {
       "rev": "8314f4c9e205e7f30b62147069729f9a1227d8bf",
@@ -52,6 +60,10 @@
       "rev": "cf2a288696b03d0934da713d66c6d71557b5c997",
       "src": "https://github.com/rose-pine/neovim"
     },
+    "nui.nvim": {
+      "rev": "de740991c12411b663994b2860f1a4fd0937c130",
+      "src": "https://github.com/MunifTanjim/nui.nvim"
+    },
     "nvim-bqf": {
       "rev": "daa1a130632dc2b05a9a73538bac058dfa4e0b86",
       "src": "https://github.com/kevinhwang91/nvim-bqf"
@@ -79,6 +91,10 @@
     "render-markdown.nvim": {
       "rev": "73a6ebc842cf81926eb1d424820b800f6f6a1227",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
+    },
+    "snacks.nvim": {
+      "rev": "fe7cfe9800a182274d0f868a74b7263b8c0c020b",
+      "src": "https://github.com/folke/snacks.nvim"
     },
     "toggleterm.nvim": {
       "rev": "9a88eae817ef395952e08650b3283726786fb5fb",
