@@ -35,7 +35,7 @@ require("conform").setup {
         go = { "gofmt" },
         c = { "clang_format" },
         cpp = { "clang_format" },
-        python = { "black" },
+        python = { "ruff_format", "ruff_organize_imports" },
     },
     format_on_save = function(bufnr)
         -- Disable with a global or buffer-local variable
