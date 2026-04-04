@@ -12,25 +12,25 @@ vim.opt_local.shiftwidth = 4
 -- end
 
 vim.lsp.config("lua_ls", {
-	settings = {
-		Lua = {
-			workspace = {
-				-- library = get_workspace_libs(),
-				checkThirdParty = false, -- Prevents annoying "Do you want to configure your workspace" popups
-			},
-			diagnostics = {
-				globals = { "vim", "use", "M" }
-			},
-			runtime = {
-				version = "LuaJIT",
-				-- path = (function()
-				-- 	local p = vim.split(package.path, ";")
-				-- 	table.insert(p, "lua/?.lua")
-				-- 	table.insert(p, "lua/?/init.lua")
-				-- 	return p
-				-- end)()
-			},
-			hint = { enable = true }
-		},
-	}
+    settings = {
+        Lua = {
+            workspace = {
+                -- library = get_workspace_libs(),
+                checkThirdParty = false, -- Prevents annoying "Do you want to configure your workspace" popups
+            },
+            diagnostics = {
+                globals = { "vim", "use", "M" },
+            },
+            runtime = {
+                version = "LuaJIT",
+                -- path = (function()
+                -- 	local p = vim.split(package.path, ";")
+                -- 	table.insert(p, "lua/?.lua")
+                -- 	table.insert(p, "lua/?/init.lua")
+                -- 	return p
+                -- end)()
+            },
+            hint = { enable = true },
+        },
+    },
 })
