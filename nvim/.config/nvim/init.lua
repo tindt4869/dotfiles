@@ -39,3 +39,4 @@ vim.pack.add {
 require("render-markdown").setup {}
 
 require "plugins.competi-test"
+require "plugins.debugger"
