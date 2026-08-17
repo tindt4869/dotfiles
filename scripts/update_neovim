@@ -3,19 +3,66 @@
 # Stop script on any error
 set -e
 
-echo "Downloading latest Neovim..."
-curl -LO https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.tar.gz
+# Detect OS and architecture
+case "$(uname -s)" in
+    Linux)
+        os=linux
+        case "$(uname -m)" in
+            x86_64) arch=x86_64 ;;
+            aarch64 | arm64) arch=aarch64 ;;
+            *) echo "Unsupported architecture: $(uname -m)" >&2; exit 1 ;;
+        esac
+        ;;
+    Darwin)
+        os=macos
+        case "$(uname -m)" in
+            x86_64) arch=x86_64 ;;
+            arm64) arch=arm64 ;;
+            *) echo "Unsupported architecture: $(uname -m)" >&2; exit 1 ;;
+        esac
+        ;;
+    *)
+        echo "Unsupported OS: $(uname -s)" >&2
+        exit 1
+        ;;
+esac
+
+asset="nvim-${os}-${arch}.tar.gz"
+
+# Select Neovim version: stable (default) or nightly
+while true; do
+    read -rp "Select version [stable/nightly] (default: stable): " version
+    case "${version,,}" in
+        "" | s | stable)
+            version=stable
+            url="https://github.com/neovim/neovim/releases/latest/download/${asset}"
+            break
+            ;;
+        n | nightly)
+            version=nightly
+            url="https://github.com/neovim/neovim/releases/download/nightly/${asset}"
+            break
+            ;;
+        *)
+            echo "Invalid choice '$version'. Enter 'stable' or 'nightly'."
+            ;;
+    esac
+done
+
+echo "Downloading Neovim $version ($asset)..."
+curl -LO "$url"
 
 echo "Cleaning up old installation..."
-sudo rm -rf /opt/nvim-linux-x86_64
+sudo rm -rf "/opt/nvim-${os}-${arch}"
 
 echo "Extracting to /opt..."
-sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
+sudo tar -C /opt -xzf "$asset"
 
 echo "Creating symbolic link..."
-sudo ln -sf /opt/nvim-linux-x86_64/bin/nvim /usr/local/bin/nvim
+sudo ln -sf "/opt/nvim-${os}-${arch}/bin/nvim" /usr/local/bin/nvim
 
 echo "Cleaning up tarball..."
-rm nvim-linux-x86_64.tar.gz
+rm "$asset"
 
-echo "Installation complete! Try running 'nvim --version'"
+echo "Installation complete!"
+echo "Installed: $(nvim --version | head -n 1)"
