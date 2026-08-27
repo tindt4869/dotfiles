@@ -14,7 +14,6 @@ require "core.autocommands"
 require "core.usercommands"
 require "core.keymaps"
 require "core.magic"
-require "core.theme"
 
 require "plugins.lsp"
 require "plugins.fzf-lua"
@@ -39,3 +38,5 @@ require("render-markdown").setup {}
 
 require "plugins.competi-test"
 require "plugins.debugger"
+
+require "core.theme"
