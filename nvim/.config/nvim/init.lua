@@ -7,15 +7,14 @@ vim.o.tabstop = 4
 vim.o.signcolumn = "yes"
 vim.o.winborder = "rounded"
 vim.o.pumborder = "rounded"
-vim.o.lazyredraw = true
 vim.o.cursorline = false
 vim.o.timeoutlen = 1000
 
-require "core.theme"
 require "core.autocommands"
 require "core.usercommands"
 require "core.keymaps"
 require "core.magic"
+require "core.theme"
 
 require "plugins.lsp"
 require "plugins.fzf-lua"
@@ -28,9 +27,9 @@ require "plugins.trouble"
 require "plugins.gitsigns"
 require "plugins.toggleterm"
 -- require("plugins.better-quickfix")
-require "plugins.bento"
+-- require "plugins.bento"
 require "plugins.ufo"
-require "plugins.auto-session"
+require "plugins.sessions"
 require "plugins.indent"
 require "utils.packageutils"
 vim.pack.add {
