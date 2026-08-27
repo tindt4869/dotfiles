@@ -8,18 +8,6 @@
       "rev": "f35b7747d4d536fba96aa098a4144e5c85252828",
       "src": "https://github.com/b0o/SchemaStore.nvim"
     },
-    "assistant.nvim": {
-      "rev": "d34d2cf8ebd551b26193e70354d87571c980ca61",
-      "src": "https://github.com/A7lavinraj/assistant.nvim"
-    },
-    "auto-session": {
-      "rev": "292492ab7af4bd8b9e37e28508bc8ce995722fd5",
-      "src": "https://github.com/rmagatti/auto-session"
-    },
-    "bento.nvim": {
-      "rev": "d5a2edea7ea2a5353778d0996a881be699eb4402",
-      "src": "https://github.com/serhez/bento.nvim"
-    },
     "blink.cmp": {
       "rev": "6a4914ca987453464a7dfc7fc237a992adb567d0",
       "src": "https://github.com/saghen/blink.cmp"
@@ -41,7 +29,7 @@
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "fzf-lua": {
-      "rev": "e7773d0c863a31bfc8ab72dd1adbec4611a35409",
+      "rev": "05e44d38de0a79c11fba5f7bf8138791b1dbdd1e",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gitsigns.nvim": {
@@ -56,17 +44,9 @@
       "rev": "29b9e13f891f9c83f44ff5bf44d22daa1af1dc71",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
-    "neovim": {
-      "rev": "cf2a288696b03d0934da713d66c6d71557b5c997",
-      "src": "https://github.com/rose-pine/neovim"
-    },
     "nui.nvim": {
       "rev": "de740991c12411b663994b2860f1a4fd0937c130",
       "src": "https://github.com/MunifTanjim/nui.nvim"
-    },
-    "nvim-bqf": {
-      "rev": "daa1a130632dc2b05a9a73538bac058dfa4e0b86",
-      "src": "https://github.com/kevinhwang91/nvim-bqf"
     },
     "nvim-dap": {
       "rev": "4f5deb110d9ff8994d96c21df95e2271d11214f9",
@@ -83,6 +63,10 @@
     "nvim-lspconfig": {
       "rev": "92ee7d42320edfbb81f3cad851314ab197fa324a",
       "src": "https://github.com/neovim/nvim-lspconfig"
+    },
+    "nvim-moegi": {
+      "rev": "a06d887e25958b870ed385d6b177722c6ce72db0",
+      "src": "https://github.com/tindt4869/nvim-moegi.git"
     },
     "nvim-nio": {
       "rev": "21f5324bfac14e22ba26553caf69ec76ae8a7662",
@@ -111,6 +95,10 @@
     "snacks.nvim": {
       "rev": "fe7cfe9800a182274d0f868a74b7263b8c0c020b",
       "src": "https://github.com/folke/snacks.nvim"
+    },
+    "suannhai.nvim": {
+      "rev": "a23b9de33680a82cea19b215c9e4d7ef3891b2f4",
+      "src": "https://github.com/WeiTing1991/suannhai.nvim"
     },
     "toggleterm.nvim": {
       "rev": "9a88eae817ef395952e08650b3283726786fb5fb",
