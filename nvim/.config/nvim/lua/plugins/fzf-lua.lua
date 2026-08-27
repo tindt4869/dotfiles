@@ -28,7 +28,20 @@ local ui_slim_dropdown = {
 }
 
 fzf.setup {
-    fzf_opts = { ["--layout"] = "reverse" },
+    fzf_opts = {
+        ["--layout"] = "reverse",
+        -- `--border` is already "none" (borderless), but we must declare it here
+        -- so fzf-lua skips generating the ANSI-wrapped `--border-label` (which
+        -- otherwise corrupts `winopts.title` and shows raw escape codes in the
+        -- split statusline, e.g. `^[[38;2;...m h ^[[0m` instead of `h`).
+        ["--border"] = false,
+        -- ["--delimiter"] = ":",
+        -- ["--preview"] = "f=$(echo {1} | cut -d'"
+        --     .. ICON_SEP
+        --     .. '\' -f2-); bat --style=numbers --color=always --highlight-line {2} "$f" 2>/dev/null',
+        -- ["--preview-window"] = "right:50%:+{2}-5",
+    },
+    -- previewer = false,
     fzf_colors = {
         ["fg"] = { "fg", "CursorLine" },
         ["bg"] = { "bg", "Normal" },
@@ -45,6 +58,8 @@ fzf.setup {
         -- --hidden: find dotfiles
         -- --exclude: .git: don't index the git folder itself
         fd_opts = "--type f --hidden --exclude .git",
+        previewer = "fzf",
+        preview = "bat --color=always --style=numbers --theme=ansi {-1}",
     },
     grep = {
         -- --hidden: search inside dotfiles
@@ -63,6 +78,7 @@ fzf.setup {
 vim.keymap.set("n", "<leader>ff", fzf.files, { desc = "Fzf Files" })
 vim.keymap.set("n", "<leader>fg", fzf.live_grep, { desc = "Fzf Live Grep" })
 vim.keymap.set("n", "<leader>fw", fzf.grep_cword, { desc = "Fzf Word under cursor" })
+vim.keymap.set("v", "<leader>fw", fzf.grep_visual, { desc = "Fzf Selected text" })
 vim.keymap.set("n", "<leader>fb", fzf.buffers, { desc = "Fzf Buffers" })
 vim.keymap.set("n", "<leader>fh", fzf.help_tags, { desc = "Fzf Help" })
 vim.keymap.set("n", "<leader>fz", fzf.grep_curbuf, { desc = "Fzf Current Buffer" })
