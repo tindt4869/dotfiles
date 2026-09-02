@@ -1,5 +1,8 @@
 # AGENTS.md — Neovim Configuration
 
+> Tip: for GPU/Vulkan tool build troubleshooting (whisper.cpp, llama.cpp, SPIRV-Headers,
+> shared-lib/RUNPATH pitfalls), see `docs/vulkan-build-notes.md`.
+
 This is a personal Neovim config using `vim.pack` (built-in package management). No plugin manager like lazy.nvim.
 
 ## Commands
